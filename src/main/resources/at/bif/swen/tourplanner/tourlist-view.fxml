@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefWidth="200" prefHeight="400" spacing="8" minWidth="300"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="at.bif.swen.tourplanner.view.MainController">
+    <TextField fx:id="searchField" promptText="Search…"/>
+    <ListView fx:id="tourList" prefHeight="400"/>
+    <HBox spacing="10">
+        <Button text="Add" onAction="#onAddButtonClick"/>
+        <Button text="Print Tour" onAction="#onAddButtonClick"/>
+        <Button text="Print Summary" onAction="#onAddButtonClick"/>
+    </HBox>
+</VBox>

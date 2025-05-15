@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<MenuBar xmlns="http://javafx.com/javafx/17.0.12"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="at.bif.swen.tourplanner.view.MainController">
+    <Menu text="Datei">
+        <MenuItem text="Neu"/>
+        <MenuItem text="Öffnen"/>
+        <MenuItem text="Speichern"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Beenden" onAction="#onExitButtonClick"/>
+    </Menu>
+
+    <Menu text="Bearbeiten">
+        <MenuItem text="Rückgängig"/>
+        <MenuItem text="Wiederholen"/>
+    </Menu>
+
+    <Menu text="Hilfe">
+        <MenuItem text="Über" onAction="#onAddButtonClick"/>
+    </Menu>
+</MenuBar>

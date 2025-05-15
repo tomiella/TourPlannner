@@ -30,7 +30,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        routesSummary.textProperty().bind(viewModel.routesSummaryProperty());
-        newRouteName.textProperty().bindBidirectional(viewModel.newRouteNameProperty());
+//        routesSummary.textProperty().bind(viewModel.routesSummaryProperty());
+//        newRouteName.textProperty().bindBidirectional(viewModel.newRouteNameProperty());
     }
 }

@@ -1,46 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 
-<GridPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.bif.swen.tourplanner.view.MainController">
-    <columnConstraints>
-        <ColumnConstraints hgrow="NEVER"/>
-        <ColumnConstraints hgrow="ALWAYS"/>
-        <ColumnConstraints hgrow="NEVER"/>
-        <ColumnConstraints hgrow="NEVER"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints vgrow="NEVER"/>
-        <RowConstraints vgrow="ALWAYS"/>
-        <RowConstraints vgrow="NEVER"/>
-    </rowConstraints>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            fx:controller="at.bif.swen.tourplanner.view.MainController">
 
-    <children>
-        <Label text="Enter new Route:" minWidth="90">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </GridPane.margin>
-        </Label>
-        <TextField fx:id="newRouteName" minWidth="50" GridPane.columnIndex="1">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </GridPane.margin>
-        </TextField>
-        <Button onAction="#onAddButtonClick" text="_Add" GridPane.columnIndex="3" minWidth="64">
-            <GridPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </GridPane.margin>
-        </Button>
-        <Label fx:id="routesSummary" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
-        <Button onAction="#onExitButtonClick" text="E_xit" GridPane.columnSpan="4" GridPane.halignment="CENTER"
-                GridPane.rowIndex="2" minWidth="64"/>
-    </children>
-    <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-    </padding>
+    <top>
+        <fx:include source="navbar-view.fxml"/>
+    </top>
 
-</GridPane>
+    <left>
+        <fx:include source="tourlist-view.fxml"/>
+    </left>
 
+    <center>
+        <fx:include source="tourlogs-view.fxml"/>
+    </center>
+</BorderPane>

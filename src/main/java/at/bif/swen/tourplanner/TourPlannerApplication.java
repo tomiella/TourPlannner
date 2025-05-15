@@ -11,7 +11,7 @@ import javafx.application.Application;
 public class TourPlannerApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setTitle("TourPlanner");
         stage.setScene(scene);
         stage.show();
