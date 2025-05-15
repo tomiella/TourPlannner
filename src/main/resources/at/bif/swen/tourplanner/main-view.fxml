@@ -21,4 +21,5 @@
     <center>
         <fx:include source="tourlogs-view.fxml"/>
     </center>
+
 </BorderPane>
