@@ -4,7 +4,7 @@
 
 <MenuBar xmlns="http://javafx.com/javafx/17.0.12"
          xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="at.bif.swen.tourplanner.view.MainController">
+         fx:controller="at.bif.swen.tourplanner.view.MenuController">
     <Menu text="Datei">
         <MenuItem text="Neu"/>
         <MenuItem text="Öffnen"/>
@@ -19,6 +19,6 @@
     </Menu>
 
     <Menu text="Hilfe">
-        <MenuItem text="Über" onAction="#onAddButtonClick"/>
+        <MenuItem text="Über"/>
     </Menu>
 </MenuBar>
