@@ -1,6 +1,6 @@
 package at.bif.swen.tourplanner.model;
 
-public class RouteItem {
+public class TourItem {
 
     private String name;
     private String description;
@@ -8,7 +8,7 @@ public class RouteItem {
     private String to;
     private TransportType transportType;
 
-    public RouteItem(String name) {
+    public TourItem(String name) {
         this.name = name;
     }
 

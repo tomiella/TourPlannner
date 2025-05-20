@@ -6,7 +6,7 @@
 <VBox prefWidth="200" prefHeight="400" spacing="8" minWidth="300"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="at.bif.swen.tourplanner.view.MainController">
+      fx:controller="at.bif.swen.tourplanner.viewmodel.TourListViewModel">
     <TextField fx:id="searchField" promptText="Search…"/>
     <ListView fx:id="tourList" prefHeight="400"/>
     <HBox spacing="10">

@@ -2,15 +2,15 @@ package at.bif.swen.tourplanner.model;
 
 import java.util.Date;
 
-public class Routelog {
+public class TourLog {
     private Date datetime;
     private String comment;
     private int difficulty;
     private int rating;
     private int duration;
-    private RouteItem route;
+    private TourItem route;
 
-    public Routelog(Date datetime, String comment, int difficulty, int rating, int duration, RouteItem route) {
+    public TourLog(Date datetime, String comment, int difficulty, int rating, int duration, TourItem route) {
         this.datetime = datetime;
         this.comment = comment;
         this.difficulty = difficulty;
@@ -59,11 +59,11 @@ public class Routelog {
         this.duration = duration;
     }
 
-    public RouteItem getRoute() {
+    public TourItem getRoute() {
         return route;
     }
 
-    public void setRoute(RouteItem route) {
+    public void setRoute(TourItem route) {
         this.route = route;
     }
 }

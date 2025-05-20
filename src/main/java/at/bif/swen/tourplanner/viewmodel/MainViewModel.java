@@ -1,20 +1,20 @@
 package at.bif.swen.tourplanner.viewmodel;
 
-import at.bif.swen.tourplanner.model.RouteItem;
-import at.bif.swen.tourplanner.model.RouteItemList;
+import at.bif.swen.tourplanner.model.TourItem;
+import at.bif.swen.tourplanner.model.TourItemList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class MainViewModel {
-    private RouteItemList routeItemList = new RouteItemList();
-    private RouteItem routeItem = new RouteItem("Default Route");
+    private TourItemList tourItemList = new TourItemList();
+    private TourItem tourItem = new TourItem("Default Route");
 
     private final StringProperty newRouteName = new SimpleStringProperty("Default Route");
     private final StringProperty routesSummary = new SimpleStringProperty("No routes yet");
 
     public MainViewModel() {
         newRouteName.addListener((observable, oldValue, newValue) -> {
-            routeItem = new RouteItem(newValue);
+            tourItem = new TourItem(newValue);
         });
     }
 
@@ -23,8 +23,8 @@ public class MainViewModel {
     }
 
     public void createNewRoute() {
-        routeItemList.setRoute(routeItem);
-        routesSummaryProperty().setValue(routeItemList.toString());
+        tourItemList.setRoute(tourItem);
+        routesSummaryProperty().setValue(tourItemList.toString());
 
         newRouteNameProperty().setValue("");
     }
@@ -33,11 +33,11 @@ public class MainViewModel {
         return routesSummary;
     }
 
-    public RouteItemList getRouteItemList() {
-        return routeItemList;
+    public TourItemList getRouteItemList() {
+        return tourItemList;
     }
 
-    public void setRouteItemList(RouteItemList routeItemList) {
-        this.routeItemList = routeItemList;
+    public void setRouteItemList(TourItemList tourItemList) {
+        this.tourItemList = tourItemList;
     }
 }

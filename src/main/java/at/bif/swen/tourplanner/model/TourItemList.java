@@ -3,18 +3,18 @@ package at.bif.swen.tourplanner.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteItemList {
-    private final List<RouteItem> routes = new ArrayList<>();
+public class TourItemList {
+    private final List<TourItem> routes = new ArrayList<>();
 
-    public RouteItemList() {
+    public TourItemList() {
 
     }
 
-    public List<RouteItem> getRoutes() {
+    public List<TourItem> getRoutes() {
         return routes;
     }
 
-    public void setRoute(RouteItem route) {
+    public void setRoute(TourItem route) {
         routes.add(route);
     }
 
@@ -22,7 +22,7 @@ public class RouteItemList {
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        for (RouteItem route : routes) {
+        for (TourItem route : routes) {
             result.append(route.toString()).append("\n");
         }
 

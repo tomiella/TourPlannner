@@ -1,6 +1,10 @@
 package at.bif.swen.tourplanner;
 
+import at.bif.swen.tourplanner.service.TourManager;
+import at.bif.swen.tourplanner.viewmodel.MainViewModel;
+import at.bif.swen.tourplanner.viewmodel.TourListViewModel;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -9,9 +13,40 @@ import javafx.application.Application;
 
 
 public class TourPlannerApplication extends Application {
+    private final TourManager tourManager;
+
+    private final MainViewModel mainViewModel;
+    private final TourListViewModel tourListViewModel;
+
+    public TourPlannerApplication() {
+        this.tourManager = new TourManager();
+
+        this.mainViewModel = new MainViewModel();
+        this.tourListViewModel = new TourListViewModel(tourManager);
+    }
+
+    @Override
     public void start(Stage stage) throws IOException {
+        Parent root = loadRootNode(mainViewModel, tourListViewModel);
+        showStage(stage, root);
+    }
+
+    public static Parent loadRootNode(MainViewModel mainViewModel, TourListViewModel tourListViewModel) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        fxmlLoader.setControllerFactory(controllerClass -> {
+            if (controllerClass == MainViewModel.class) {
+                return mainViewModel;
+            } else if (controllerClass == TourListViewModel.class) {
+                return tourListViewModel;
+            } else {
+                throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
+            }
+        });
+        return fxmlLoader.load();
+    }
+
+    public static void showStage(Stage stage, Parent root) {
+        Scene scene = new Scene(root);
         stage.setMinWidth(500);
         stage.setMinHeight(400);
         stage.setTitle("TourPlanner");
