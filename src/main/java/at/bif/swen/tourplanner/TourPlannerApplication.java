@@ -1,6 +1,9 @@
 package at.bif.swen.tourplanner;
 
 import at.bif.swen.tourplanner.service.TourManager;
+import at.bif.swen.tourplanner.view.MainController;
+import at.bif.swen.tourplanner.view.MenuController;
+import at.bif.swen.tourplanner.view.TourListController;
 import at.bif.swen.tourplanner.viewmodel.MainViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourListViewModel;
 import javafx.fxml.FXMLLoader;
@@ -34,10 +37,12 @@ public class TourPlannerApplication extends Application {
     public static Parent loadRootNode(MainViewModel mainViewModel, TourListViewModel tourListViewModel) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
         fxmlLoader.setControllerFactory(controllerClass -> {
-            if (controllerClass == MainViewModel.class) {
-                return mainViewModel;
-            } else if (controllerClass == TourListViewModel.class) {
-                return tourListViewModel;
+            if (controllerClass == MainController.class) {
+                return new MainController();
+            } else if (controllerClass == TourListController.class) {
+                return new TourListController(tourListViewModel);
+            } else if (controllerClass == MenuController.class) {
+                return new MenuController();
             } else {
                 throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
             }

@@ -13,7 +13,7 @@ import java.beans.PropertyChangeSupport;
 public class TourListViewModel {
     private final TourManager tourManager;
 
-    private final StringProperty searchText = new SimpleStringProperty("");
+    private final StringProperty searchText = new SimpleStringProperty("Test");
 
     private final PropertyChangeSupport tourCreatedEvent = new PropertyChangeSupport(this);
 
@@ -27,12 +27,15 @@ public class TourListViewModel {
         tourCreatedEvent.addPropertyChangeListener(listener);
     }
 
-
     public void addTour() {
         // TODO: add tours
     }
 
     public void searchTours() {
         // TODO: filter tours
+    }
+
+    public StringProperty searchTextProperty() {
+        return searchText;
     }
 }

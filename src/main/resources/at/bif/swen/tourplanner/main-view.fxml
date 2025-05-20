@@ -7,8 +7,7 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/17.0.12"
-            fx:controller="at.bif.swen.tourplanner.view.MainController">
+            xmlns="http://javafx.com/javafx/17.0.12">
 
     <top>
         <fx:include source="navbar-view.fxml"/>
