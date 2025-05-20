@@ -1,11 +1,10 @@
 package at.bif.swen.tourplanner;
 
 import at.bif.swen.tourplanner.service.TourManager;
-import at.bif.swen.tourplanner.view.MainController;
-import at.bif.swen.tourplanner.view.MapViewController;
+import at.bif.swen.tourplanner.view.DetailsController;
 import at.bif.swen.tourplanner.view.MenuController;
 import at.bif.swen.tourplanner.view.TourListController;
-import at.bif.swen.tourplanner.viewmodel.MainViewModel;
+import at.bif.swen.tourplanner.viewmodel.DetailsViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourListViewModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,35 +18,32 @@ import javafx.application.Application;
 public class TourPlannerApplication extends Application {
     private final TourManager tourManager;
 
-    private final MainViewModel mainViewModel;
     private final TourListViewModel tourListViewModel;
+    private final DetailsViewModel detailsViewModel;
 
     public TourPlannerApplication() {
         this.tourManager = new TourManager();
 
-        this.mainViewModel = new MainViewModel();
+        this.detailsViewModel = new DetailsViewModel();
         this.tourListViewModel = new TourListViewModel(tourManager);
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = loadRootNode(mainViewModel, tourListViewModel);
+        Parent root = loadRootNode(tourListViewModel, detailsViewModel);
         showStage(stage, root);
     }
 
-    public static Parent loadRootNode(MainViewModel mainViewModel, TourListViewModel tourListViewModel) throws IOException {
+    public static Parent loadRootNode(TourListViewModel tourListViewModel, DetailsViewModel detailsViewModel) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
         fxmlLoader.setControllerFactory(controllerClass -> {
-            if (controllerClass == MainController.class) {
-                return new MainController();
+            if (controllerClass == DetailsController.class) {
+                return new DetailsController(detailsViewModel);
             } else if (controllerClass == TourListController.class) {
-                return new TourListController(tourListViewModel);
+                return new TourListController(tourListViewModel, new DetailsController(detailsViewModel));
             } else if (controllerClass == MenuController.class) {
                 return new MenuController();
-            } else if (controllerClass == MapViewController.class) {
-                return new MapViewController();
-            }
-            else {
+            } else {
                 throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
             }
         });

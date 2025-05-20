@@ -23,7 +23,7 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <fx:include source="map-view.fxml"/>
+            <fx:include source="details-view.fxml"/>
             <fx:include source="tourlogs-view.fxml"/>
         </VBox>
     </center>

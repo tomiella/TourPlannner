@@ -7,11 +7,19 @@ public class TourItem {
     private String from;
     private String to;
     private TransportType transportType;
+    private String imagePath;
 
     public TourItem(String name) {
         this.name = name;
     }
 
+    public TourItem(String name, String description, String from, String to, TransportType transportType) {
+        this.name = name;
+        this.description = description;
+        this.from = from;
+        this.to = to;
+        this.transportType = transportType;
+    }
 
     @Override
     public String toString() {
@@ -56,5 +64,13 @@ public class TourItem {
 
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

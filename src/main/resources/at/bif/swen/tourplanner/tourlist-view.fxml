@@ -12,6 +12,6 @@
     <HBox spacing="10">
         <Button text="Add" onAction="#onAddButtonClick"/>
         <Button text="Edit" onAction="#onEditButtonClick"/>
-        <Button text="Print Summary" onAction="#onAddButtonClick"/>
+        <Button text="Delete" onAction="#onDeleteButtonClick"/>
     </HBox>
 </VBox>

@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class TourListController implements Initializable {
     private final TourListViewModel viewModel;
+    private final DetailsController detailsController;
 
     @FXML
     public ListView<TourItem> tourList;
@@ -23,23 +24,29 @@ public class TourListController implements Initializable {
 
     @FXML
     protected void onAddButtonClick() {
-        viewModel.addTour();
+        viewModel.addTour(tourList.getScene().getWindow());
     }
 
     @FXML
     protected void onEditButtonClick() {
-        TourItem selectedItem = tourList.getSelectionModel().getSelectedItem();
+        TourItem selectedItem = getSelectedTourItem();
         if (selectedItem == null) {
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setHeaderText("No tour selected");
-            a.setContentText("Please select a tour to edit");
-            a.showAndWait();
             return;
         }
-        viewModel.editTour(selectedItem);
+        viewModel.editTour(tourList.getScene().getWindow(), selectedItem);
     }
 
-    public TourListController(TourListViewModel viewModel) {
+    @FXML
+    protected void onDeleteButtonClick() {
+        TourItem selectedItem = getSelectedTourItem();
+        if (selectedItem == null) {
+            return;
+        }
+        viewModel.deleteTour(selectedItem);
+    }
+
+    public TourListController(TourListViewModel viewModel, DetailsController detailsController) {
+        this.detailsController = detailsController;
         this.viewModel = viewModel;
     }
 
@@ -47,5 +54,20 @@ public class TourListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Bindings.bindBidirectional(searchField.textProperty(), viewModel.searchTextProperty());
         tourList.setItems(viewModel.getTourList());
+        tourList.getSelectionModel().selectedItemProperty().addListener((obs, oldT, newT) -> {
+            detailsController.setSelected(newT);
+        });
+    }
+
+    private TourItem getSelectedTourItem() {
+        TourItem selectedItem = tourList.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setHeaderText("No tour selected");
+            a.setContentText("Please select a tour to edit");
+            a.showAndWait();
+            return null;
+        }
+        return selectedItem;
     }
 }
