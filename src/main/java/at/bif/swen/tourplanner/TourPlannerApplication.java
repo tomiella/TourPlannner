@@ -2,6 +2,7 @@ package at.bif.swen.tourplanner;
 
 import at.bif.swen.tourplanner.service.TourManager;
 import at.bif.swen.tourplanner.view.MainController;
+import at.bif.swen.tourplanner.view.MapViewController;
 import at.bif.swen.tourplanner.view.MenuController;
 import at.bif.swen.tourplanner.view.TourListController;
 import at.bif.swen.tourplanner.viewmodel.MainViewModel;
@@ -43,7 +44,10 @@ public class TourPlannerApplication extends Application {
                 return new TourListController(tourListViewModel);
             } else if (controllerClass == MenuController.class) {
                 return new MenuController();
-            } else {
+            } else if (controllerClass == MapViewController.class) {
+                return new MapViewController();
+            }
+            else {
                 throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
             }
         });
