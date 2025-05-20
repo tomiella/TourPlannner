@@ -11,7 +11,7 @@
 <VBox spacing="10"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="at.bif.swen.tourplanner.view.MainController">
+      fx:controller="at.bif.swen.tourplanner.view.TourLogsController">
 
     <VBox spacing="5">
         <HBox spacing="10" alignment="CENTER_RIGHT">
@@ -21,12 +21,12 @@
 
         <TableView fx:id="logTable" prefHeight="200">
             <columns>
-                <TableColumn text="Date" fx:id="dateCol"/>
-                <TableColumn text="Comment"   fx:id="commentCol"/>
-                <TableColumn text="Duration"  fx:id="durationCol"/>
-                <TableColumn text="Difficulty" fx:id="difficultyCol"/>
-                <TableColumn text="Rating"    fx:id="ratingCol"/>
-                <TableColumn text="Action"    fx:id="actionCol"/>
+                <TableColumn fx:id="dateCol" text="Date" />
+                <TableColumn fx:id="commentCol" text="Comment" />
+                <TableColumn fx:id="durationCol" text="Duration" />
+                <TableColumn fx:id="difficultyCol" text="Difficulty" />
+                <TableColumn fx:id="ratingCol" text="Rating" />
+
             </columns>
         </TableView>
     </VBox>
