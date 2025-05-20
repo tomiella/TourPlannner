@@ -11,7 +11,7 @@
     <ListView fx:id="tourList" prefHeight="400"/>
     <HBox spacing="10">
         <Button text="Add" onAction="#onAddButtonClick"/>
-        <Button text="Print Tour" onAction="#onAddButtonClick"/>
+        <Button text="Edit" onAction="#onEditButtonClick"/>
         <Button text="Print Summary" onAction="#onAddButtonClick"/>
     </HBox>
 </VBox>

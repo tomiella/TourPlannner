@@ -9,14 +9,40 @@ public class TourManager {
             new TourItem("Default Route"),
             new TourItem("Tour 2")
     );
+    private final ObservableList<TourItem> filteredTourList = FXCollections.observableArrayList();
 
-    public TourItem createTour(String name) {
+    private String lastSearchText = null;
+
+    public TourManager() {
+        searchTours(null);
+    }
+
+    public void createTour(String name) {
         TourItem tour = new TourItem(name);
         tourList.add(tour);
-        return tour;
+        searchTours(lastSearchText);
+    }
+
+    public void editTour(TourItem tour) {
+        int index = tourList.indexOf(tour);
+        tourList.set(index, tour);
+    }
+
+    public void searchTours(String searchText) {
+        filteredTourList.clear();
+        if (searchText == null || searchText.isEmpty()) {
+            filteredTourList.addAll(tourList);
+        } else {
+            for (TourItem tour : tourList) {
+                if (tour.getName().toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredTourList.add(tour);
+                }
+            }
+        }
+        lastSearchText = searchText;
     }
 
     public ObservableList<TourItem> getTourList() {
-        return tourList;
+        return filteredTourList;
     }
 }
