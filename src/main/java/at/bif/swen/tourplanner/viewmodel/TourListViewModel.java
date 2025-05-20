@@ -79,6 +79,10 @@ public class TourListViewModel {
         });
     }
 
+    public ObservableList<TourItem> getTourList() {
+        return tourManager.getTourList();
+    }
+
     public void searchTours() {
         // TODO: filter tours
     }

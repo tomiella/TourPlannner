@@ -15,13 +15,7 @@ public class TourItem {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append(name).append("\n");
-        result.append(description).append("\n");
-        result.append(from).append(" -> ").append(to).append("\n");
-        result.append(transportType.toString());
-
-        return result.toString();
+        return name;
     }
 
     public String getName() {
