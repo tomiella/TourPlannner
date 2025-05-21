@@ -6,10 +6,9 @@
          xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="at.bif.swen.tourplanner.view.MenuController">
     <Menu text="Datei">
-<!--        <MenuItem text="Neu"/>-->
-<!--        <MenuItem text="Öffnen"/>-->
-<!--        <MenuItem text="Speichern"/>-->
-<!--        <SeparatorMenuItem/>-->
+        <MenuItem text="export"/>
+        <MenuItem text="import"/>
+        <MenuItem text="Report"/>
         <MenuItem text="Beenden" onAction="#onExitButtonClick"/>
     </Menu>
 
