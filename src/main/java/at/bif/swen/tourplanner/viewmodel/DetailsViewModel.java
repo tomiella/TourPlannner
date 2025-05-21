@@ -29,7 +29,7 @@ public class DetailsViewModel {
         transport.set(tour.getTransportType().toString());
 
         if (tour.getImagePath() != null && !tour.getImagePath().isBlank()) {
-            image.set(new Image("file:" + tour.getImagePath()));
+            image.set(new Image(tour.getImagePath()));
         } else {
             image.set(null);
         }
