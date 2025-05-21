@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 import javafx.application.Application;
 
 
@@ -26,6 +27,11 @@ public class TourPlannerApplication extends Application {
     private final DetailsViewModel detailsViewModel;
     private final TourLogViewModel tourLogViewModel;
 
+    private final DetailsController detailsController;
+    private final TourLogsController tourLogsController;
+    private final TourListController tourListController;
+    private final MenuController menuController;
+
     public TourPlannerApplication() {
         this.tourManager = new TourManager();
         this.logManager = new LogManager();
@@ -33,28 +39,32 @@ public class TourPlannerApplication extends Application {
         this.detailsViewModel = new DetailsViewModel();
         this.tourListViewModel = new TourListViewModel(tourManager);
         this.tourLogViewModel = new TourLogViewModel(logManager);
+
+        this.detailsController = new DetailsController(detailsViewModel);
+        this.tourLogsController = new TourLogsController(tourLogViewModel);
+        this.tourListController = new TourListController(tourListViewModel, detailsController, tourLogsController);
+        this.menuController = new MenuController();
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = loadRootNode(tourListViewModel, detailsViewModel, tourLogViewModel);
+        Parent root = loadRootNode(detailsController, tourLogsController, tourListController, menuController);
         showStage(stage, root);
     }
 
-    public static Parent loadRootNode(TourListViewModel tourListViewModel, DetailsViewModel detailsViewModel, TourLogViewModel tourLogViewModel) throws IOException {
+    public static Parent loadRootNode(DetailsController detailsController, TourLogsController tourLogsController, TourListController tourListController, MenuController menuController) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
         fxmlLoader.setControllerFactory(controllerClass -> {
             if (controllerClass == DetailsController.class) {
-                return new DetailsController(detailsViewModel);
+                return detailsController;
+            } else if (controllerClass == TourLogsController.class) {
+                return tourLogsController;
             } else if (controllerClass == TourListController.class) {
-                return new TourListController(tourListViewModel, new DetailsController(detailsViewModel));
+                return tourListController;
             } else if (controllerClass == MenuController.class) {
-                return new MenuController();
-            } else if(controllerClass == TourLogsController.class)
-            {
-                return new TourLogsController(tourLogViewModel);
-            }else {
-                throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
+                return menuController;
+            } else {
+                throw new IllegalArgumentException("Unknown controller: " + controllerClass);
             }
         });
         return fxmlLoader.load();

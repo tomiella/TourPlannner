@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class TourListController implements Initializable {
     private final TourListViewModel viewModel;
     private final DetailsController detailsController;
+    private final TourLogsController logsController;
 
     @FXML
     public ListView<TourItem> tourList;
@@ -45,8 +46,9 @@ public class TourListController implements Initializable {
         viewModel.deleteTour(selectedItem);
     }
 
-    public TourListController(TourListViewModel viewModel, DetailsController detailsController) {
+    public TourListController(TourListViewModel viewModel, DetailsController detailsController, TourLogsController logsController) {
         this.detailsController = detailsController;
+        this.logsController = logsController;
         this.viewModel = viewModel;
     }
 
@@ -56,6 +58,7 @@ public class TourListController implements Initializable {
         tourList.setItems(viewModel.getTourList());
         tourList.getSelectionModel().selectedItemProperty().addListener((obs, oldT, newT) -> {
             detailsController.setSelected(newT);
+            logsController.setSelected(newT);
         });
     }
 

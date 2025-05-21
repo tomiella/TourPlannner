@@ -10,12 +10,13 @@ public class TourLog {
     private int duration;
     private TourItem route;
 
-    public TourLog(Date datetime, String comment, int difficulty, int rating, int duration) {
+    public TourLog(Date datetime, String comment, int difficulty, int rating, int duration, TourItem route) {
         this.datetime = datetime;
         this.comment = comment;
         this.difficulty = difficulty;
         this.rating = rating;
         this.duration = duration;
+        this.route = route;
     }
     public TourLog(String comment) {
         this.comment = comment;

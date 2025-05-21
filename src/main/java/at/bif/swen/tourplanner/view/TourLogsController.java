@@ -94,4 +94,8 @@ public class TourLogsController implements Initializable {
         }
         return selectedItem;
     }
+
+    public void setSelected(TourItem tour) {
+        viewModel.setSelected(tour);
+    }
 }

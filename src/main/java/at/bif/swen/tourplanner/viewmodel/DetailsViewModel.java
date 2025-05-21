@@ -11,6 +11,9 @@ public class DetailsViewModel {
     private final StringProperty transport = new SimpleStringProperty("");
 
     public void setSelected(TourItem tour) {
+        if (tour == null) {
+           return;
+        }
         name.set(tour.getName());
         description.set(tour.getDescription());
         route.set(tour.getFrom() + " → " + tour.getTo());

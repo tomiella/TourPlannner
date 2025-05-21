@@ -18,6 +18,7 @@ import java.util.Optional;
 public class TourLogViewModel {
 
     private final LogManager logManager;
+    private TourItem selectedTour = null;
 
     public TourLogViewModel(LogManager logManager) {
         this.logManager = logManager;
@@ -26,7 +27,7 @@ public class TourLogViewModel {
     public void addLog(Window owner) {
         TourLog result = showLogDialog(owner,null);
         if (result != null) {
-            logManager.createTour(result.getDatetime(), result.getComment(), result.getDifficulty(), result.getRating(), result.getDuration());
+            logManager.createTour(result.getDatetime(), result.getComment(), result.getDifficulty(), result.getRating(), result.getDuration(), selectedTour);
         }
     }
 
@@ -128,5 +129,10 @@ public class TourLogViewModel {
 
         Optional<TourLog> result = dialog.showAndWait();
         return result.orElse(null);
+    }
+
+    public void setSelected(TourItem tour) {
+        selectedTour = tour;
+        logManager.setSelectedTour(tour);
     }
 }
