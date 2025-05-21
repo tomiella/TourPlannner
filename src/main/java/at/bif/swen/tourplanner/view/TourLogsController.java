@@ -1,5 +1,6 @@
 package at.bif.swen.tourplanner.view;
 
+import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.service.LogManager;
 import at.bif.swen.tourplanner.viewmodel.TourLogViewModel;
@@ -32,8 +33,26 @@ public class TourLogsController implements Initializable {
 
     @FXML
     protected void onAddButtonClick() {
-        viewModel.addLog();
+        viewModel.addLog(logTable.getScene().getWindow());
         logTable.setItems(viewModel.getLogList());
+    }
+
+    @FXML
+    protected void onEditButtonClick() {
+        TourLog selectedItem = getSelectedTourLog();
+        if (selectedItem == null) {
+            return;
+        }
+        viewModel.editLog(logTable.getScene().getWindow(), selectedItem);
+    }
+
+    @FXML
+    protected void onDeleteButtonClick() {
+        TourLog selectedItem = getSelectedTourLog();
+        if(selectedItem == null){
+            return;
+        }
+        viewModel.deleteLog(selectedItem);
     }
 
     public TourLogsController(TourLogViewModel viewModel) {
@@ -62,5 +81,17 @@ public class TourLogsController implements Initializable {
 
 
         logTable.setItems(viewModel.getLogList());
+    }
+
+    private TourLog getSelectedTourLog() {
+        TourLog selectedItem = logTable.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setHeaderText("No tour selected");
+            a.setContentText("Please select a tour to edit");
+            a.showAndWait();
+            return null;
+        }
+        return selectedItem;
     }
 }

@@ -17,15 +17,18 @@
         <HBox spacing="10" alignment="CENTER_RIGHT">
             <Label text="Tour Logs" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
             <Button text="Add" onAction="#onAddButtonClick"/>
+            <Button text="Edit" onAction="#onEditButtonClick"/>
+            <Button text="Delete" onAction="#onDeleteButtonClick"/>
+
         </HBox>
 
         <TableView fx:id="logTable" prefHeight="200">
             <columns>
-                <TableColumn fx:id="dateCol" text="Date" />
-                <TableColumn fx:id="commentCol" text="Comment" />
-                <TableColumn fx:id="durationCol" text="Duration" />
-                <TableColumn fx:id="difficultyCol" text="Difficulty" />
-                <TableColumn fx:id="ratingCol" text="Rating" />
+                <TableColumn prefWidth="200" fx:id="dateCol" text="Date" />
+                <TableColumn prefWidth="200" fx:id="commentCol" text="Comment" />
+                <TableColumn prefWidth="200" fx:id="durationCol" text="Duration" />
+                <TableColumn prefWidth="200" fx:id="difficultyCol" text="Difficulty" />
+                <TableColumn prefWidth="200" fx:id="ratingCol" text="Rating" />
 
             </columns>
         </TableView>

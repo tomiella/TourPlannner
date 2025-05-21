@@ -1,5 +1,6 @@
 package at.bif.swen.tourplanner.viewmodel;
 
+import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.service.LogManager;
 import javafx.beans.property.StringProperty;
@@ -8,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Window;
 
 import java.time.ZoneId;
 import java.util.Date;
@@ -21,27 +23,41 @@ public class TourLogViewModel {
         this.logManager = logManager;
     }
 
-    public void addLog() {
-        TourLog result = showLogDialog(null);
+    public void addLog(Window owner) {
+        TourLog result = showLogDialog(owner,null);
         if (result != null) {
             logManager.createTour(result.getDatetime(), result.getComment(), result.getDifficulty(), result.getRating(), result.getDuration());
         }
+    }
+
+    public void editLog(Window owner, TourLog tour) {
+        TourLog result = showLogDialog(owner, tour);
+
+        if (result != null) {
+            logManager.editTour(result);
+        }
+    }
+
+    public void deleteLog(TourLog tour)
+    {
+        logManager.deleteLog(tour);
     }
 
     public ObservableList<TourLog> getLogList() {
         return logManager.getLogList();
     }
 
-    private TourLog showLogDialog(TourLog existing) {
+    private TourLog showLogDialog(Window owner, TourLog existing) {
         boolean isEdit = existing != null;
         Dialog<TourLog> dialog = new Dialog<>();
+        dialog.initOwner(owner);
         dialog.setTitle(isEdit ? "Edit Log" : "Add New Log");
         dialog.setHeaderText(isEdit ? "Modify the log entry" : "Enter new log details");
 
         ButtonType saveButtonType = new ButtonType(isEdit ? "Save" : "Add", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
 
-        // Grid Layout
+
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -53,7 +69,7 @@ public class TourLogViewModel {
         Spinner<Integer> ratingSpinner = new Spinner<>(1, 5, 3);
         Spinner<Integer> durationSpinner = new Spinner<>(1, 1440, 60); // duration in minutes
 
-        // Set existing values if editing
+
         if (isEdit) {
             commentArea.setText(existing.getComment());
             difficultySpinner.getValueFactory().setValue(existing.getDifficulty());
