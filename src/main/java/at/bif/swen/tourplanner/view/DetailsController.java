@@ -50,16 +50,10 @@ public class DetailsController implements Initializable {
         Bindings.bindBidirectional(descriptionArea.textProperty(), viewModel.descriptionProperty());
         Bindings.bindBidirectional(routeLabel.textProperty(), viewModel.routeProperty());
         Bindings.bindBidirectional(transportLabel.textProperty(), viewModel.transportProperty());
+        Bindings.bindBidirectional(tourImage.imageProperty(), viewModel.imageProperty());
     }
 
     public void setSelected(TourItem tour) {
         viewModel.setSelected(tour);
-
-//        if (tour.getImagePath() != null) {
-//            tourImage.setImage(new Image(tour.getImagePath(), 200, 0, true, true));
-//        } else {
-//            tourImage.setImage(null);
-//        }
-
     }
 }
