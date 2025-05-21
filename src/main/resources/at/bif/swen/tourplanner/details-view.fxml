@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextArea?>
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.bif.swen.tourplanner.view.DetailsController">
     <left>
-        <VBox fx:id="detailsPane" prefHeight="400" prefWidth="350" minWidth="200">
+        <VBox fx:id="detailsPane" prefHeight="400" prefWidth="300" minWidth="200">
             <Label text="Tour Details" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
             <ImageView fx:id="tourImage" fitWidth="200" preserveRatio="true"/>
             <Label text="Name:"/>
@@ -23,7 +23,7 @@
     </left>
 
     <center>
-        <WebView fx:id="mapWebView" minWidth="200" prefHeight="200.0" prefWidth="200.0" maxHeight="500" maxWidth="700" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+        <WebView fx:id="mapWebView" minWidth="200" prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
     </center>
 
 </BorderPane>

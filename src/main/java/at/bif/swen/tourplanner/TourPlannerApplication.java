@@ -62,7 +62,7 @@ public class TourPlannerApplication extends Application {
 
     public static void showStage(Stage stage, Parent root) {
         Scene scene = new Scene(root);
-        stage.setMinWidth(610);
+        stage.setMinWidth(725);
         stage.setMinHeight(400);
         stage.setTitle("TourPlanner");
         stage.sizeToScene();
