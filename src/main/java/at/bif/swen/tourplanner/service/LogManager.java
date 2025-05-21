@@ -30,4 +30,8 @@ public class LogManager {
         int index = logList.indexOf(tour);
         logList.set(index, tour);
     }
+
+    public void deleteLog(TourLog tour){
+        logList.remove(tour);
+    }
 }
