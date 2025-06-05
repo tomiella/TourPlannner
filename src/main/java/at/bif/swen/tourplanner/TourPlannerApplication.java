@@ -9,6 +9,7 @@ import at.bif.swen.tourplanner.view.TourLogsController;
 import at.bif.swen.tourplanner.viewmodel.DetailsViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourListViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourLogViewModel;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,57 +18,41 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import javafx.application.Application;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import javax.swing.*;
 
 
 public class TourPlannerApplication extends Application {
-    private final TourManager tourManager;
-    private final LogManager logManager;
 
-    private final TourListViewModel tourListViewModel;
-    private final DetailsViewModel detailsViewModel;
-    private final TourLogViewModel tourLogViewModel;
 
-    private final DetailsController detailsController;
-    private final TourLogsController tourLogsController;
-    private final TourListController tourListController;
-    private final MenuController menuController;
+    private ConfigurableApplicationContext springContext;
+
 
     public TourPlannerApplication() {
-        this.tourManager = new TourManager();
-        this.logManager = new LogManager();
 
-        this.detailsViewModel = new DetailsViewModel();
-        this.tourListViewModel = new TourListViewModel(tourManager);
-        this.tourLogViewModel = new TourLogViewModel(logManager);
-
-        this.detailsController = new DetailsController(detailsViewModel);
-        this.tourLogsController = new TourLogsController(tourLogViewModel);
-        this.tourListController = new TourListController(tourListViewModel, detailsController, tourLogsController);
-        this.menuController = new MenuController();
     }
+    @Override
+    public void init() {
+        springContext = new SpringApplicationBuilder(TourPlannerConfig.class).run(getParameters().getRaw().toArray(new String[0]));
+    }
+
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = loadRootNode(detailsController, tourLogsController, tourListController, menuController);
+        FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
+        fxmlLoader.setControllerFactory(springContext::getBean);
+
+        Parent root = fxmlLoader.load();
         showStage(stage, root);
     }
 
-    public static Parent loadRootNode(DetailsController detailsController, TourLogsController tourLogsController, TourListController tourListController, MenuController menuController) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(TourPlannerApplication.class.getResource("main-view.fxml"));
-        fxmlLoader.setControllerFactory(controllerClass -> {
-            if (controllerClass == DetailsController.class) {
-                return detailsController;
-            } else if (controllerClass == TourLogsController.class) {
-                return tourLogsController;
-            } else if (controllerClass == TourListController.class) {
-                return tourListController;
-            } else if (controllerClass == MenuController.class) {
-                return menuController;
-            } else {
-                throw new IllegalArgumentException("Unknown controller: " + controllerClass);
-            }
-        });
-        return fxmlLoader.load();
+
+    @Override
+    public void stop() {
+        springContext.close();
+        Platform.exit();
     }
 
     public static void showStage(Stage stage, Parent root) {

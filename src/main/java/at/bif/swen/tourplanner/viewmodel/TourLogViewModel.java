@@ -10,11 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
+import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Optional;
 
+@Component
 public class TourLogViewModel {
 
     private final LogManager logManager;

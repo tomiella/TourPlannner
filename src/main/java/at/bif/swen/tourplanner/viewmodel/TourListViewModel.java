@@ -16,12 +16,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Optional;
 
+
+@Component
 public class TourListViewModel {
     private final TourManager tourManager;
 

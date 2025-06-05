@@ -1,7 +1,11 @@
-package at.bif.swen.tourplanner.view;
+package at.bif.swen.tourplanner.viewmodel;
 
 import at.bif.swen.tourplanner.TourPlannerApplication;
 import at.bif.swen.tourplanner.service.LogManager;
+import at.bif.swen.tourplanner.view.DetailsController;
+import at.bif.swen.tourplanner.view.MenuController;
+import at.bif.swen.tourplanner.view.TourListController;
+import at.bif.swen.tourplanner.view.TourLogsController;
 import at.bif.swen.tourplanner.viewmodel.DetailsViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourListViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourLogViewModel;
@@ -39,9 +43,16 @@ class TourPlannerUiTest {
         detailsViewModel = new DetailsViewModel();
         logViewModel = new TourLogViewModel(new LogManager());
 
+        DetailsController detailsController = new DetailsController(detailsViewModel);
+        TourLogsController tourLogsController = new TourLogsController(logViewModel);
+        TourListController tourListController = new TourListController(listViewModel, detailsController, tourLogsController);
+        MenuController menuController = new MenuController();
+
         // load and show UI
-        root = TourPlannerApplication.loadRootNode(listViewModel, detailsViewModel, logViewModel);
-        TourPlannerApplication.showStage(stage, root);
+
+
+
+
     }
 
     @Test

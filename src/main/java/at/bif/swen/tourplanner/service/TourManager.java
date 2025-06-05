@@ -2,19 +2,29 @@ package at.bif.swen.tourplanner.service;
 
 import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TransportType;
+import at.bif.swen.tourplanner.repository.TourItemRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TourManager {
     private final ObservableList<TourItem> tourList = FXCollections.observableArrayList(
             new TourItem("City Tour", "A guided tour through the city's main attractions.", "Central Park", "City Museum", TransportType.CAR)
     );
     private final ObservableList<TourItem> filteredTourList = FXCollections.observableArrayList();
-
     private String lastSearchText = null;
+    TourItemRepository repository;
 
     public TourManager() {
         searchTours(null);
+    }
+
+    @Autowired
+    public TourManager(TourItemRepository repository) {
+        this.repository = repository;
+
     }
 
     public void createTour(TourItem tour) {

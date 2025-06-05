@@ -11,10 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Controller
 public class DetailsController implements Initializable {
     private final DetailsViewModel viewModel;
 

@@ -1,13 +1,32 @@
 package at.bif.swen.tourplanner.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "logs")
 public class TourLog {
+
+    @Id
+    private int id;
     private Date datetime;
     private String comment;
     private int difficulty;
     private int rating;
     private int duration;
+
+    @ManyToOne
     private TourItem route;
 
     public TourLog(Date datetime, String comment, int difficulty, int rating, int duration, TourItem route) {
@@ -22,51 +41,4 @@ public class TourLog {
         this.comment = comment;
     }
 
-    public Date getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public TourItem getRoute() {
-        return route;
-    }
-
-    public void setRoute(TourItem route) {
-        this.route = route;
-    }
 }
