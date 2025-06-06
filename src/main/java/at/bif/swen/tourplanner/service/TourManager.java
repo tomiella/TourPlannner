@@ -28,6 +28,7 @@ public class TourManager {
     }
 
     public void createTour(TourItem tour) {
+        repository.save(tour);
         tourList.add(tour);
         searchTours(lastSearchText);
     }

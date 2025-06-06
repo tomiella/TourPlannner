@@ -1,21 +1,15 @@
 package at.bif.swen.tourplanner.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
-@Table(name = "tours")
 public class TourItem {
 
     @Id
@@ -23,7 +17,9 @@ public class TourItem {
     private int id;
     private String name;
     private String description;
+    @Column(name = "from_location")
     private String from;
+    @Column(name = "to_location")
     private String to;
     private TransportType transportType;
     private String imagePath;
