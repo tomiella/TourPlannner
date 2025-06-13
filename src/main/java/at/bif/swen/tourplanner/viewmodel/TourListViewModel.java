@@ -2,6 +2,7 @@ package at.bif.swen.tourplanner.viewmodel;
 
 import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TransportType;
+import at.bif.swen.tourplanner.service.LogManager;
 import at.bif.swen.tourplanner.service.TourManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -16,6 +17,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import lombok.Getter;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -27,7 +30,14 @@ import java.util.Optional;
 
 @Component
 public class TourListViewModel {
+    protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(TourListViewModel.class);
+
     private final TourManager tourManager;
+
+    private final ObservableList<TourItem> allTours = FXCollections.observableArrayList();
+
+    @Getter
+    private final ObservableList<TourItem> filteredTours = FXCollections.observableArrayList();
 
     private final StringProperty searchText = new SimpleStringProperty("");
 
@@ -37,6 +47,8 @@ public class TourListViewModel {
         this.tourManager = tourManager;
 
         this.searchText.addListener((observable, oldValue, newValue) -> searchTours());
+
+        refresh();
     }
 
     public void addTour(Window owner) {
@@ -45,6 +57,7 @@ public class TourListViewModel {
         if (result != null) {
             tourManager.createTour(result);
         }
+        refresh();
     }
 
     public void editTour(Window owner, TourItem tour) {
@@ -53,18 +66,16 @@ public class TourListViewModel {
         if (result != null) {
             tourManager.editTour(result);
         }
+        refresh();
     }
 
     public void deleteTour(TourItem tour) {
         tourManager.deleteTour(tour);
-    }
-
-    public ObservableList<TourItem> getTourList() {
-        return tourManager.getTourList();
+        refresh();
     }
 
     public void searchTours() {
-        tourManager.searchTours(searchText.get());
+        filteredTours.setAll(tourManager.searchTours(allTours, searchText.get()));
     }
 
     public StringProperty searchTextProperty() {
@@ -184,5 +195,14 @@ public class TourListViewModel {
 
         Optional<TourItem> result = dialog.showAndWait();
         return result.orElse(null);
+    }
+
+    public void refresh() {
+        allTours.clear();
+        allTours.setAll(tourManager.loadTourItems());
+        searchTours();
+
+        logger.info(allTours.size() + " tours loaded");
+        logger.info(filteredTours.size() + " tours loaded");
     }
 }

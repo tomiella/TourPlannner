@@ -57,7 +57,7 @@ public class TourListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Bindings.bindBidirectional(searchField.textProperty(), viewModel.searchTextProperty());
-        tourList.setItems(viewModel.getTourList());
+        tourList.setItems(viewModel.getFilteredTours());
         tourList.getSelectionModel().selectedItemProperty().addListener((obs, oldT, newT) -> {
             detailsController.setSelected(newT);
             logsController.setSelected(newT);

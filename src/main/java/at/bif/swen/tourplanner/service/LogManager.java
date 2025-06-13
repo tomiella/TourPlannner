@@ -14,7 +14,7 @@ import java.util.Observer;
 
 @Service
 public class LogManager {
-    protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger();
+    protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(LogManager.class);
 
     TourItemRepository repository;
     private final ObservableList<TourLog> logList = FXCollections.observableArrayList();
