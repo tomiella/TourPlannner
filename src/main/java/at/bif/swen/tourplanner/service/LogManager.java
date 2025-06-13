@@ -5,6 +5,7 @@ import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.repository.TourItemRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.Observer;
 
 @Service
 public class LogManager {
+    protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger();
 
     TourItemRepository repository;
     private final ObservableList<TourLog> logList = FXCollections.observableArrayList();
@@ -29,21 +31,23 @@ public class LogManager {
 
 
     public void createTour(Date datetime, String comment, int difficulty, int rating, int duration, TourItem tour) {
-        System.out.println("Hashcode: " + this.hashCode());
         TourLog tourLog = new TourLog(datetime, comment, difficulty,rating,duration, tour);
         logList.add(tourLog);
         setSelectedTour(tour);
+        logger.info("Created tour log: {}", tourLog.getId());
     }
 
     public void editTour(TourLog tour) {
         int index = logList.indexOf(tour);
         logList.set(index, tour);
         setSelectedTour(selectedTour);
+        logger.info("Edited tour log: {}", tour.getId());
     }
 
     public void deleteLog(TourLog tour){
         logList.remove(tour);
         setSelectedTour(selectedTour);
+        logger.info("Deleted tour log: {}", tour.getId());
     }
 
     public void setSelectedTour(TourItem tour) {

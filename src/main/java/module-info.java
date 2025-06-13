@@ -15,7 +15,7 @@ module at.bif.swen.tourplanner {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires static lombok;
-
+    requires org.apache.logging.log4j;
 
 
     opens at.bif.swen.tourplanner to javafx.fxml;
