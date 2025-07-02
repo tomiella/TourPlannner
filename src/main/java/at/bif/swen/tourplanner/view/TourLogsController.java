@@ -3,6 +3,7 @@ package at.bif.swen.tourplanner.view;
 import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.service.LogManager;
+import at.bif.swen.tourplanner.viewmodel.TourListViewModel;
 import at.bif.swen.tourplanner.viewmodel.TourLogViewModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -34,6 +35,10 @@ public class TourLogsController implements Initializable {
     @FXML
     public TableColumn<TourLog, Integer> durationCol;
 
+    public TourLogsController(TourLogViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @FXML
     protected void onAddButtonClick() {
         viewModel.addLog(logTable.getScene().getWindow());
@@ -58,16 +63,8 @@ public class TourLogsController implements Initializable {
         viewModel.deleteLog(selectedItem);
     }
 
-    public TourLogsController(TourLogViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        viewModel = new TourLogViewModel(new LogManager());
-
-
         commentCol.setCellValueFactory(new PropertyValueFactory<>("comment"));
         difficultyCol.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));

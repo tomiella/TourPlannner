@@ -19,6 +19,8 @@ module at.bif.swen.tourplanner {
     requires java.net.http;
     requires json.path;
     requires com.fasterxml.jackson.databind;
+    requires kernel;
+    requires layout;
 
 
     opens at.bif.swen.tourplanner to javafx.fxml;
@@ -35,6 +37,7 @@ module at.bif.swen.tourplanner {
     exports at.bif.swen.tourplanner.model;
     exports at.bif.swen.tourplanner.view;
     exports at.bif.swen.tourplanner.viewmodel;
+    exports at.bif.swen.tourplanner.service;
 
 
 
