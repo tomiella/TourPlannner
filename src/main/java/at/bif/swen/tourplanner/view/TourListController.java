@@ -33,6 +33,7 @@ public class TourListController implements Initializable {
     @FXML
     protected void onEditButtonClick() {
         TourItem selectedItem = getSelectedTourItem();
+      
         if (selectedItem == null) {
             return;
         }

@@ -3,6 +3,7 @@ package at.bif.swen.tourplanner.service;
 import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.model.TransportType;
+import at.bif.swen.tourplanner.openRouteService.OpenRouteServiceAgent;
 import at.bif.swen.tourplanner.repository.TourItemRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,9 @@ public class TourManager {
     private String lastSearchText = null;
     TourItemRepository repository;
 
+    @Autowired
+    private RouteService routeService;
+
     public TourManager() {
     }
 
@@ -25,11 +29,13 @@ public class TourManager {
         this.repository = repository;
     }
 
+
     public ObservableList<TourItem> loadTourItems() {
         return FXCollections.observableArrayList(repository.findAll());
     }
 
     public void createTour(TourItem tour) {
+        this.routeService.getTourInformation(tour);
         repository.save(tour);
         logger.info("Created tour: {}", tour);
     }

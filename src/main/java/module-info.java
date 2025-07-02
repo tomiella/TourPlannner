@@ -16,6 +16,9 @@ module at.bif.swen.tourplanner {
     requires org.hibernate.orm.core;
     requires static lombok;
     requires org.apache.logging.log4j;
+    requires java.net.http;
+    requires json.path;
+    requires com.fasterxml.jackson.databind;
 
 
     opens at.bif.swen.tourplanner to javafx.fxml;
@@ -23,6 +26,8 @@ module at.bif.swen.tourplanner {
     opens at.bif.swen.tourplanner.view to javafx.fxml;
     opens at.bif.swen.tourplanner.viewmodel to javafx.fxml;
     opens at.bif.swen.tourplanner.service to spring.core, spring.beans;
+    opens at.bif.swen.tourplanner.openRouteService to spring.beans, spring.core;
+
 
 
 
