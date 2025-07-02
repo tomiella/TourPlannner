@@ -16,6 +16,8 @@ module at.bif.swen.tourplanner {
     requires org.hibernate.orm.core;
     requires static lombok;
     requires org.apache.logging.log4j;
+    requires kernel;
+    requires layout;
 
 
     opens at.bif.swen.tourplanner to javafx.fxml;
@@ -30,6 +32,7 @@ module at.bif.swen.tourplanner {
     exports at.bif.swen.tourplanner.model;
     exports at.bif.swen.tourplanner.view;
     exports at.bif.swen.tourplanner.viewmodel;
+    exports at.bif.swen.tourplanner.service;
 
 
 

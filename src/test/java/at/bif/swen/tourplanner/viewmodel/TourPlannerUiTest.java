@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TourPlannerUiTest {
 
     private TourManager tourManager;
+    private LogManager logManager;
     private TourListViewModel listViewModel;
     private DetailsViewModel detailsViewModel;
     private TourLogViewModel logViewModel;
@@ -41,7 +42,7 @@ class TourPlannerUiTest {
         tourManager = new TourManager();
         listViewModel = new TourListViewModel(tourManager);
         detailsViewModel = new DetailsViewModel();
-        logViewModel = new TourLogViewModel(new LogManager());
+        logViewModel = new TourLogViewModel(logManager);
 
         DetailsController detailsController = new DetailsController(detailsViewModel);
         TourLogsController tourLogsController = new TourLogsController(logViewModel);

@@ -8,7 +8,8 @@
     <Menu text="Datei">
         <MenuItem text="export"/>
         <MenuItem text="import"/>
-        <MenuItem text="Report"/>
+        <MenuItem text="Report Summary" onAction="#onSummaryReportButtonClick"/>
+        <MenuItem text="Report TourItem" onAction="#onTourReportButtonClick"/>
         <MenuItem text="Beenden" onAction="#onExitButtonClick"/>
     </Menu>
 

@@ -64,7 +64,7 @@ public class TourListController implements Initializable {
         });
     }
 
-    private TourItem getSelectedTourItem() {
+    public TourItem getSelectedTourItem() {
         TourItem selectedItem = tourList.getSelectionModel().getSelectedItem();
         if (selectedItem == null) {
             Alert a = new Alert(Alert.AlertType.INFORMATION);
