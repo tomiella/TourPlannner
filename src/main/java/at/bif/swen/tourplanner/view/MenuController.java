@@ -41,6 +41,7 @@ public class MenuController implements Initializable {
     @FXML
     protected void onImportButtonClick() {
         menuViewModel.importTour();
+        tourListController.refresh();
     }
 
     @Override

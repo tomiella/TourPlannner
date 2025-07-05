@@ -76,4 +76,8 @@ public class TourListController implements Initializable {
         }
         return selectedItem;
     }
+
+    public void refresh() {
+        viewModel.refresh();
+    }
 }

@@ -37,6 +37,7 @@ public class TourLogsController implements Initializable {
 
     public TourLogsController(TourLogViewModel viewModel) {
         this.viewModel = viewModel;
+        viewModel.refresh();
     }
 
     @FXML

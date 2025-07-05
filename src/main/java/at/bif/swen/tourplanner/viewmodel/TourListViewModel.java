@@ -1,6 +1,7 @@
 package at.bif.swen.tourplanner.viewmodel;
 
 import at.bif.swen.tourplanner.model.TourItem;
+import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.model.TransportType;
 import at.bif.swen.tourplanner.service.LogManager;
 import at.bif.swen.tourplanner.service.TourManager;
@@ -18,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -25,14 +27,17 @@ import org.springframework.stereotype.Controller;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Component
+@Log4j2
 public class TourListViewModel {
-    protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(TourListViewModel.class);
 
     private final TourManager tourManager;
+    private final LogManager logManager;
 
     private final ObservableList<TourItem> allTours = FXCollections.observableArrayList();
 
@@ -43,8 +48,9 @@ public class TourListViewModel {
 
     private final PropertyChangeSupport tourCreatedEvent = new PropertyChangeSupport(this);
 
-    public TourListViewModel(TourManager tourManager) {
+    public TourListViewModel(TourManager tourManager, LogManager logManager) {
         this.tourManager = tourManager;
+        this.logManager = logManager;
 
         this.searchText.addListener((observable, oldValue, newValue) -> searchTours());
 
@@ -75,9 +81,18 @@ public class TourListViewModel {
     }
 
     public void searchTours() {
-        filteredTours.setAll(tourManager.searchTours(allTours, searchText.get()));
-    }
+        Set<TourItem> resultSet = new LinkedHashSet<>(tourManager.searchTours(allTours, searchText.get()));
 
+        ObservableList<TourLog> filteredLogs = logManager.searchLogs(logManager.loadLogItems(), searchText.get());
+        for (TourLog log : filteredLogs) {
+            TourItem item = log.getRoute();
+            if (item != null) {
+                resultSet.add(item);
+            }
+        }
+
+        filteredTours.setAll(resultSet);
+    }
     public StringProperty searchTextProperty() {
         return searchText;
     }
@@ -202,7 +217,7 @@ public class TourListViewModel {
         allTours.setAll(tourManager.loadTourItems());
         searchTours();
 
-        logger.info(allTours.size() + " tours loaded");
-        logger.info(filteredTours.size() + " tours loaded");
+        log.info(allTours.size() + " tours loaded");
+        log.info(filteredTours.size() + " tours loaded");
     }
 }

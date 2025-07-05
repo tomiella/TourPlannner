@@ -4,23 +4,34 @@ import at.bif.swen.tourplanner.model.TourItem;
 import at.bif.swen.tourplanner.model.TourLog;
 import at.bif.swen.tourplanner.service.LogManager;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
+import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
+@Log4j2
 public class TourLogViewModel {
 
     private final LogManager logManager;
     private TourItem selectedTour = null;
+
+    private final ObservableList<TourLog> allTourLogs = FXCollections.observableArrayList();
+
+    @Getter
+    private final ObservableList<TourLog> filteredTourLogs = FXCollections.observableArrayList();
 
     public TourLogViewModel(LogManager logManager) {
         this.logManager = logManager;
@@ -47,7 +58,7 @@ public class TourLogViewModel {
     }
 
     public ObservableList<TourLog> getLogList() {
-        return logManager.getLogList();
+        return filteredTourLogs;
     }
 
     private TourLog showLogDialog(Window owner, TourLog existing) {
@@ -134,7 +145,22 @@ public class TourLogViewModel {
     }
 
     public void setSelected(TourItem tour) {
+        refresh();
+        log.info("Selected tour: " + tour);
         selectedTour = tour;
-        logManager.setSelectedTour(tour);
+        // filter to only show tourlogs taht includes the tour
+        List<TourLog> logs = allTourLogs.stream().filter(l -> l.getRoute().equals(tour)).toList();
+        log.info("Found " + logs.size() + " tour logs");
+        filteredTourLogs.clear();
+        filteredTourLogs.addAll(logs);
+        log.info("Filtered tour logs: " + filteredTourLogs);
+    }
+
+    public void refresh() {
+        allTourLogs.clear();
+        allTourLogs.setAll(logManager.loadLogItems());
+
+        log.info(allTourLogs.size() + " logs loaded");
+        log.info(filteredTourLogs.size() + " logs loaded");
     }
 }

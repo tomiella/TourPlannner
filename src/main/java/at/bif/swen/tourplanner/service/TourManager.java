@@ -7,13 +7,14 @@ import at.bif.swen.tourplanner.openRouteService.OpenRouteServiceAgent;
 import at.bif.swen.tourplanner.repository.TourItemRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class TourManager {
-    protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(TourManager.class);
 
     private String lastSearchText = null;
     TourItemRepository repository;
@@ -38,18 +39,18 @@ public class TourManager {
         this.routeService.getTourInformation(tour);
         System.out.println(tour.getEstimatedDuration());
         repository.save(tour);
-        logger.info("Created tour: {}", tour);
+        log.info("Created tour: {}", tour);
     }
 
     public void editTour(TourItem tour) {
         this.routeService.getTourInformation(tour);
         repository.save(tour);
-        logger.info("Edited tour: {}", tour);
+        log.info("Edited tour: {}", tour);
     }
 
     public void deleteTour(TourItem tour) {
         repository.delete(tour);
-        logger.info("Deleted tour: {}", tour);
+        log.info("Deleted tour: {}", tour);
     }
 
     public ObservableList<TourItem> searchTours(ObservableList<TourItem> tours, String searchText) {
@@ -59,6 +60,8 @@ public class TourManager {
         } else {
             for (TourItem tour : tours) {
                 if (tour.getName().toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredTourList.add(tour);
+                } else if (tour.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredTourList.add(tour);
                 }
             }
