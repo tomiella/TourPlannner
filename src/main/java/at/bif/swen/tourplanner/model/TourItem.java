@@ -3,8 +3,6 @@ package at.bif.swen.tourplanner.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Duration;
-
 
 @Getter
 @Setter
@@ -16,7 +14,7 @@ public class TourItem {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String description;
     @Column(name = "from_location")
@@ -51,6 +49,30 @@ public class TourItem {
     @Override
     public String toString() {
         return name;
+    }
+
+    public String toPrettyString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("TourItem [id=");
+        builder.append(id);
+        builder.append(", name=");
+        builder.append(name);
+        builder.append(", description=");
+        builder.append(description);
+        builder.append(", from=");
+        builder.append(from);
+        builder.append(", to=");
+        builder.append(to);
+        builder.append(", transportType=");
+        builder.append(transportType);
+        builder.append(", imagePath=");
+        builder.append(imagePath);
+        builder.append(", distance=");
+        builder.append(distance);
+        builder.append(", estimatedDuration=");
+        builder.append(estimatedDuration);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

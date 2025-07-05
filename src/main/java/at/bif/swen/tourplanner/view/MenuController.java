@@ -33,6 +33,16 @@ public class MenuController implements Initializable {
         menuViewModel.createSummaryReport();
     }
 
+    @FXML
+    protected void onExportButtonClick() {
+        menuViewModel.exportTour(tourListController.getSelectedTourItem());
+    }
+
+    @FXML
+    protected void onImportButtonClick() {
+        menuViewModel.importTour();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        routesSummary.textProperty().bind(viewModel.routesSummaryProperty());

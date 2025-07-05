@@ -1,6 +1,7 @@
 package at.bif.swen.tourplanner.viewmodel;
 
 import at.bif.swen.tourplanner.TourPlannerApplication;
+import at.bif.swen.tourplanner.service.ExportService;
 import at.bif.swen.tourplanner.service.LogManager;
 import at.bif.swen.tourplanner.service.ReportService;
 import at.bif.swen.tourplanner.view.DetailsController;
@@ -48,7 +49,7 @@ class TourPlannerUiTest {
         DetailsController detailsController = new DetailsController(detailsViewModel);
         TourLogsController tourLogsController = new TourLogsController(logViewModel);
         TourListController tourListController = new TourListController(listViewModel, detailsController, tourLogsController);
-        MenuController menuController = new MenuController(tourListController, new MenuViewModel(new ReportService()));
+        MenuController menuController = new MenuController(tourListController, new MenuViewModel(new ReportService(), new ExportService()));
 
         // load and show UI
 

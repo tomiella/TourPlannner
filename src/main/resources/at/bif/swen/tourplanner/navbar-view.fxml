@@ -6,8 +6,8 @@
          xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="at.bif.swen.tourplanner.view.MenuController">
     <Menu text="Datei">
-        <MenuItem text="export"/>
-        <MenuItem text="import"/>
+        <MenuItem text="export" onAction="#onExportButtonClick"/>
+        <MenuItem text="import" onAction="#onImportButtonClick"/>
         <MenuItem text="Report Summary" onAction="#onSummaryReportButtonClick"/>
         <MenuItem text="Report TourItem" onAction="#onTourReportButtonClick"/>
         <MenuItem text="Beenden" onAction="#onExitButtonClick"/>

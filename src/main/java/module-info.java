@@ -29,6 +29,7 @@ module at.bif.swen.tourplanner {
     opens at.bif.swen.tourplanner.viewmodel to javafx.fxml;
     opens at.bif.swen.tourplanner.service to spring.core, spring.beans;
     opens at.bif.swen.tourplanner.openRouteService to spring.beans, spring.core;
+    opens at.bif.swen.tourplanner.dto to spring.core, spring.beans;
 
 
 
@@ -38,6 +39,7 @@ module at.bif.swen.tourplanner {
     exports at.bif.swen.tourplanner.view;
     exports at.bif.swen.tourplanner.viewmodel;
     exports at.bif.swen.tourplanner.service;
+    exports at.bif.swen.tourplanner.dto;
 
 
 

@@ -15,7 +15,7 @@ public class TourLog {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private Date datetime;
     private String comment;
     private int difficulty;
