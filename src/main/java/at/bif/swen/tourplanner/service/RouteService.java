@@ -26,6 +26,7 @@ public class RouteService {
             RouteInfo routeInfo = this.extractRouteInfo(routJSON);
             tourItem.setDistance(routeInfo.getDistance());
             tourItem.setEstimatedDuration(routeInfo.getDuration());
+            System.out.println(routeInfo.getDuration());
 
 
         }catch(Exception e){
@@ -53,11 +54,11 @@ public class RouteService {
     }
 
     public RouteInfo extractRouteInfo(JsonNode json) {
-        if (json == null || !json.has("routes")) return null;
 
-        JsonNode summary = json.path("routes").get(0).path("summary");
-        double distance = summary.path("distance").asDouble();
-        double duration = summary.path("duration").asDouble();
+        double distance = json.get("features").get(0).get("properties").get("segments").get(0).get("distance").asLong();
+
+        long duration =json.get("features").get(0).get("properties").get("segments").get(0).get("duration").asLong();
+        System.out.println("Distance: " + distance + " Duration: " + duration);
 
         return new RouteInfo(distance, duration);
     }

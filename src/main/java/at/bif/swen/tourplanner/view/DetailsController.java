@@ -42,6 +42,12 @@ public class DetailsController implements Initializable {
     @FXML
     private ImageView tourImage;
 
+    @FXML
+    private Label durationLabel;
+
+    @FXML
+    private Label distanceLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         WebEngine webEngine = mapWebView.getEngine();
@@ -53,6 +59,8 @@ public class DetailsController implements Initializable {
         Bindings.bindBidirectional(routeLabel.textProperty(), viewModel.routeProperty());
         Bindings.bindBidirectional(transportLabel.textProperty(), viewModel.transportProperty());
         Bindings.bindBidirectional(tourImage.imageProperty(), viewModel.imageProperty());
+        Bindings.bindBidirectional(durationLabel.textProperty(), viewModel.durationProperty());
+        Bindings.bindBidirectional(distanceLabel.textProperty(), viewModel.distanceProperty());
     }
 
     public void setSelected(TourItem tour) {

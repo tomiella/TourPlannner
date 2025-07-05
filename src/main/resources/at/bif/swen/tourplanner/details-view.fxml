@@ -19,6 +19,10 @@
             <Label fx:id="routeLabel"/>
             <Label text="Transport:"/>
             <Label fx:id="transportLabel"/>
+            <Label text="Duration:"/>
+            <Label fx:id="durationLabel"/>
+            <Label text="distance:"/>
+            <Label fx:id="distanceLabel"/>
         </VBox>
     </left>
 

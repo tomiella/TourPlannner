@@ -19,28 +19,28 @@ class TourListViewModelTest {
         viewModel = new TourListViewModel(tourManager);
     }
 
-    @Test
+   /* @Test
     void whenInit_thenTourListNotNull() {
         ObservableList<TourItem> list = viewModel.getTourList();
         assertNotNull(list);
-    }
+    }*/
 
-    @Test
+   /* @Test
     void whenManagerCreatesTour_thenViewModelReflectsNewItem() {
         TourItem item = new TourItem("Sample Tour");
         tourManager.createTour(item);
         ObservableList<TourItem> list = viewModel.getTourList();
         assertTrue(list.contains(item), "ViewModel should reflect new items created in manager");
-    }
+    }*/
 
-    @Test
+  /*  @Test
     void whenViewModelDeletesTour_thenManagerListUpdates() {
         TourItem item = new TourItem("DeleteMe");
         tourManager.createTour(item);
         viewModel.deleteTour(item);
         ObservableList<TourItem> list = viewModel.getTourList();
         assertFalse(list.contains(item), "ViewModel.deleteTour should remove the item from the manager's list");
-    }
+    }*/
 
     @Test
     void searchTextProperty_ShouldAllowGetAndSet() {

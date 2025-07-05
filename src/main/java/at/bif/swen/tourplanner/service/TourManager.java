@@ -36,11 +36,13 @@ public class TourManager {
 
     public void createTour(TourItem tour) {
         this.routeService.getTourInformation(tour);
+        System.out.println(tour.getEstimatedDuration());
         repository.save(tour);
         logger.info("Created tour: {}", tour);
     }
 
     public void editTour(TourItem tour) {
+        this.routeService.getTourInformation(tour);
         repository.save(tour);
         logger.info("Edited tour: {}", tour);
     }

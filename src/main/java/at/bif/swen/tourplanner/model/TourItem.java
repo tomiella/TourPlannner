@@ -28,7 +28,7 @@ public class TourItem {
     @Column(name="distance")
     private Double distance;
     @Column(name="estimated_duration")
-    private Duration estimatedDuration;
+    private long estimatedDuration;
 
 
 
@@ -37,7 +37,7 @@ public class TourItem {
         this.name = name;
     }
 
-    public TourItem(String name, String description, String from, String to, TransportType transportType,double distance, Duration estimatedDuration) {
+    public TourItem(String name, String description, String from, String to, TransportType transportType,double distance, long estimatedDuration) {
         this.name = name;
         this.description = description;
         this.from = from;

@@ -5,14 +5,16 @@ import java.time.Duration;
 public class RouteInfo {
 
     public final double distance;
-    public final Duration duration;
+    public final long duration;
 
-    public RouteInfo(double distance, double durationInSeconds) {
+    public RouteInfo(double distance, long durationInSeconds) {
         this.distance = distance;
-        this.duration = Duration.ofSeconds((long) durationInSeconds);
+        this.duration = durationInSeconds;
+        System.out.println("here is the duration" + this.duration);
+
     }
 
-    public Duration getDuration() {
+    public long getDuration() {
         return duration;
     }
 
