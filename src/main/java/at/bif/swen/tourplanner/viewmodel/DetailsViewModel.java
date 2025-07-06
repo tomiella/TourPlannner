@@ -1,6 +1,7 @@
 package at.bif.swen.tourplanner.viewmodel;
 
 import at.bif.swen.tourplanner.model.TourItem;
+import at.bif.swen.tourplanner.utils.caloriesUtils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,7 +18,10 @@ public class DetailsViewModel {
     private final StringProperty transport = new SimpleStringProperty("");
     private final StringProperty duration = new SimpleStringProperty("");
     private final StringProperty distance = new SimpleStringProperty("");
+    private final StringProperty child = new SimpleStringProperty("");
+    private final StringProperty popularity = new SimpleStringProperty("");
     private final ObjectProperty<Image> image = new SimpleObjectProperty<>();
+    private final StringProperty calories = new SimpleStringProperty("");
 
     public void setSelected(TourItem tour) {
         if (tour == null) {
@@ -27,6 +31,9 @@ public class DetailsViewModel {
             transport.set("");
             duration.set("");
             distance.set("");
+            child.set("");
+            popularity.set("");
+            calories.set("");
             image.set(null);
             return;
         }
@@ -36,6 +43,7 @@ public class DetailsViewModel {
         transport.set(tour.getTransportType().toString());
         duration.set(formatUtils.formatTime(tour.getEstimatedDuration()));
         distance.set(formatUtils.formatDistance(tour.getDistance()));
+        calories.set(caloriesUtils.getCaloriesAsString(tour));
 
 
         if (tour.getImagePath() != null && !tour.getImagePath().isBlank()) {
@@ -69,7 +77,19 @@ public class DetailsViewModel {
         return distance;
     }
 
+    public StringProperty childProperty() {
+        return child;
+    }
+
+    public StringProperty popularityProperty() {
+        return popularity;
+    }
+
     public ObjectProperty<Image> imageProperty() {
         return image;
+    }
+
+    public StringProperty caloriesProperty() {
+        return calories;
     }
 }

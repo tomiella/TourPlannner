@@ -23,6 +23,12 @@
             <Label fx:id="durationLabel"/>
             <Label text="distance:"/>
             <Label fx:id="distanceLabel"/>
+            <Label text = "child friendliness"/>
+            <Label fx:id ="childLabel"/>
+            <Label text ="Popularity"/>
+            <Label fx:id="popularityLabel"/>
+            <Label text ="estimated kalories"/>
+            <Label fx:id="kaloriesLabel"/>
         </VBox>
     </left>
 
