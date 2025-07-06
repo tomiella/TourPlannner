@@ -3,8 +3,7 @@ package at.bif.swen.tourplanner.model;
 public enum TransportType {
     WALKING("foot-walking"),
     CAR("driving-car"),
-    BIKE("cycling-regular"),
-    PUBLIC_TRANSPORT("driving-car");
+    BIKE("cycling-regular");
 
     private final String transportType;
 

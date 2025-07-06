@@ -97,7 +97,7 @@ public class TourListViewModel {
         return searchText;
     }
 
-    private TourItem showTourDialog(Window owner, TourItem existing) {
+    public TourItem showTourDialog(Window owner, TourItem existing) {
         boolean isEdit = existing != null;
         Dialog<TourItem> dialog = new Dialog<>();
         dialog.initOwner(owner);
