@@ -38,6 +38,8 @@ public class TourListController implements Initializable {
             return;
         }
         viewModel.editTour(tourList.getScene().getWindow(), selectedItem);
+        detailsController.setSelected(selectedItem);
+        logsController.setSelected(selectedItem);
     }
 
     @FXML

@@ -1,6 +1,7 @@
 package at.bif.swen.tourplanner.viewmodel;
 
 import at.bif.swen.tourplanner.model.TourItem;
+import at.bif.swen.tourplanner.service.DetailsService;
 import at.bif.swen.tourplanner.utils.caloriesUtils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,6 +24,12 @@ public class DetailsViewModel {
     private final ObjectProperty<Image> image = new SimpleObjectProperty<>();
     private final StringProperty calories = new SimpleStringProperty("");
 
+    private final DetailsService detailsService;
+
+    public DetailsViewModel(DetailsService detailsService) {
+        this.detailsService = detailsService;
+    }
+
     public void setSelected(TourItem tour) {
         if (tour == null) {
             name.set("");
@@ -44,6 +51,8 @@ public class DetailsViewModel {
         duration.set(formatUtils.formatTime(tour.getEstimatedDuration()));
         distance.set(formatUtils.formatDistance(tour.getDistance()));
         calories.set(caloriesUtils.getCaloriesAsString(tour));
+        popularity.set(detailsService.calculatePopularity(tour));
+        child.set(detailsService.calculateChildFriendliness(tour));
 
 
         if (tour.getImagePath() != null && !tour.getImagePath().isBlank()) {

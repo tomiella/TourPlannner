@@ -36,7 +36,6 @@ public class LogManager {
             filteredTourLogs.addAll(logs);
         } else {
             for (TourLog log : logs) {
-                // TODO: add all filter criteriums
                 if (log.getComment().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredTourLogs.add(log);
                 }

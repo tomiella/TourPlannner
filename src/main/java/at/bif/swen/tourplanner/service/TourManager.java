@@ -19,6 +19,8 @@ public class TourManager {
     private String lastSearchText = null;
     TourItemRepository repository;
 
+    private DetailsService detailsService;
+
     @Autowired
     private RouteService routeService;
 
@@ -26,8 +28,9 @@ public class TourManager {
     }
 
     @Autowired
-    public TourManager(TourItemRepository repository) {
+    public TourManager(TourItemRepository repository, DetailsService detailsService) {
         this.repository = repository;
+        this.detailsService = detailsService;
     }
 
 
@@ -62,6 +65,10 @@ public class TourManager {
                 if (tour.getName().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredTourList.add(tour);
                 } else if (tour.getDescription().toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredTourList.add(tour);
+                } else if (detailsService.calculateChildFriendliness(tour).toLowerCase().contains(searchText.toLowerCase())) {
+                    filteredTourList.add(tour);
+                } else if (detailsService.calculatePopularity(tour).toLowerCase().contains(searchText.toLowerCase())) {
                     filteredTourList.add(tour);
                 }
             }
